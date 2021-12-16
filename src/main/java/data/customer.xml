@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:customerStorage xmlns:ns2="customers.storage">
+    <customers>
+        <customer>
+            <uid>-1539344978</uid>
+            <name>boris</name>
+            <lastname>semin</lastname>
+            <patronymic>435345</patronymic>
+            <company>53453</company>
+            <email>345345</email>
+            <phone>123</phone>
+        </customer>
+        <customer>
+            <uid>-752867</uid>
+            <name>vova</name>
+            <lastname>putin</lastname>
+            <patronymic>gdfg</patronymic>
+            <company>fdgfg</company>
+            <email>dfgdfg</email>
+            <phone>32423</phone>
+        </customer>
+    </customers>
+</ns2:customerStorage>
