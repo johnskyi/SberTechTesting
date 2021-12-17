@@ -12,16 +12,15 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(propOrder = { "uid","name", "lastname", "patronymic", "company","email","phone" })
 public class Customer {
 
-    int uid;
+    String uid;
     String name;
     String lastname;
-    String patronymic;
     String company;
     String email;
     String phone;
 
     @XmlAttribute
-    public int getUid() {
+    public String getUid() {
         return uid;
     }
 
@@ -31,7 +30,6 @@ public class Customer {
                 "uid =" + uid +
                 ", name ='" + name + '\'' +
                 ", lastname ='" + lastname + '\'' +
-                ", patronymic ='" + patronymic + '\'' +
                 ", company ='" + company + '\'' +
                 ", email ='" + email + '\'' +
                 ", phones =" + phone;

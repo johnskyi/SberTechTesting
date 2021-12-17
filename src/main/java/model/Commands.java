@@ -1,6 +1,6 @@
 package model;
 
-public enum Comands {
+public enum Commands {
     HELP,
     INSERT,
     UPDATE,

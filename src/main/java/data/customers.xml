@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:customerStorage xmlns:ns2="customers.storage">
+    <customers>
+        <customer>
+            <uid>1874821181</uid>
+            <name>test</name>
+            <lastname>test</lastname>
+            <company>sber</company>
+            <email>test@test.ru</email>
+            <phone>02</phone>
+        </customer>
+    </customers>
+</ns2:customerStorage>
