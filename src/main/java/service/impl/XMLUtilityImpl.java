@@ -1,5 +1,6 @@
 package service.impl;
 
+import lombok.experimental.UtilityClass;
 import model.CustomerStorage;
 
 import javax.xml.bind.JAXBContext;
@@ -8,6 +9,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 
+@UtilityClass
 public class XMLUtilityImpl {
     private static final String CUSTOMER_STORAGE = "src/main/java/data/customers.xml";
     private static final File FILE_STORAGE = new File(CUSTOMER_STORAGE);

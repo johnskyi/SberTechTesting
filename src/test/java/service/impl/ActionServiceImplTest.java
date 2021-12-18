@@ -1,52 +1,80 @@
 package service.impl;
 
+import exception.CustomerNotFoundException;
 import model.Customer;
-import model.CustomerStorage;
-import org.junit.jupiter.api.BeforeAll;
+import model.Request;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
 import javax.xml.bind.JAXBException;
-import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ActionServiceImplTest {
-   private static Customer testCustomerOne;
-   private static Customer testCustomerTwo;
-   private static CustomerStorage testStorage;
-    @BeforeAll
-    static void setUp() {
+    private static Customer testCustomerOne;
+
+    @BeforeEach
+    void setUp() {
         testCustomerOne = new Customer();
         testCustomerOne.setName("Ivan");
         testCustomerOne.setLastname("Ivanov");
         testCustomerOne.setCompany("Lenta");
         testCustomerOne.setEmail("test@test.ru");
         testCustomerOne.setPhone("12345");
-        testCustomerOne.setUid(String.valueOf(testCustomerOne.hashCode()));
-        testCustomerTwo = new Customer();
-        testCustomerTwo.setName("Petr");
-        testCustomerTwo.setLastname("Petrov");
-        testCustomerTwo.setCompany("Magnit");
-        testCustomerTwo.setEmail("test2@test.ru");
-        testCustomerTwo.setPhone("54321");
-        testCustomerTwo.setUid(String.valueOf(testCustomerTwo.hashCode()));
-        testStorage = new CustomerStorage(new ArrayList<>());
+        testCustomerOne.setUid("123");
+        MockitoAnnotations.openMocks(this);
     }
+    @Mock
+    ActionService actionServiceMock;
 
     @Test
+    @DisplayName("Save customer, return uid")
     void saveCustomer() throws JAXBException {
-        ActionServiceImpl actionServiceMock = Mockito.mock(ActionServiceImpl.class);
-        actionServiceMock.saveCustomer(testCustomerOne);
+        Mockito.when(actionServiceMock.saveCustomer(testCustomerOne)).thenReturn(Integer.parseInt(testCustomerOne.getUid()));
+        assertEquals(123,actionServiceMock.saveCustomer(testCustomerOne));
     }
 
     @Test
-    void deleteCustomer() {
+    @DisplayName("Deleted customer, return uid")
+    void deleteCustomer() throws JAXBException, CustomerNotFoundException {
+        Request request = Request.builder().lastname("Ivanov").build();
+        Mockito.when(actionServiceMock.deleteCustomer(request)).thenReturn(Integer.parseInt(testCustomerOne.getUid()));
+        assertEquals(123,actionServiceMock.deleteCustomer(request));
     }
 
     @Test
-    void updateCustomer() {
+    @DisplayName("Updated customer, return uid")
+    void updateCustomer() throws JAXBException, CustomerNotFoundException {
+        Request request = Request.builder().lastname("Ivanov").company("Magnet").build();
+        Mockito.when(actionServiceMock.updateCustomer(request)).thenReturn(Integer.parseInt(testCustomerOne.getUid()));
+        assertEquals(123,actionServiceMock.updateCustomer(request));
     }
 
     @Test
-    void findCustomerByPhone() {
+    @DisplayName("Find customer, return customer")
+    void findCustomerByPhone() throws JAXBException, CustomerNotFoundException {
+        Request request = Request.builder().phone("12345").build();
+        Mockito.when(actionServiceMock.findCustomerByPhone(request)).thenReturn(testCustomerOne);
+        assertEquals(testCustomerOne,actionServiceMock.findCustomerByPhone(request));
     }
+    @Test
+    @DisplayName("Find unknown customer throws customerNotFound")
+    void findCustomerByPhone_throwsCustomerNotFound() throws JAXBException, CustomerNotFoundException {
+        Request request = Request.builder().phone("123").build();
+        Mockito.when(actionServiceMock.findCustomerByPhone(Mockito.any())).thenThrow(CustomerNotFoundException.class);
+        assertThrows(CustomerNotFoundException.class, () ->actionServiceMock.findCustomerByPhone(request));
+    }
+    @Test
+    @DisplayName("Find unknown customer throws customerNotFound")
+    void updateCustomer_throwsCustomerNotFound() throws JAXBException, CustomerNotFoundException {
+        Request request = Request.builder().lastname("Petrov").build();
+        Mockito.when(actionServiceMock.updateCustomer(Mockito.any())).thenThrow(CustomerNotFoundException.class);
+        assertThrows(CustomerNotFoundException.class, () ->actionServiceMock.updateCustomer(request));
+    }
+
 }

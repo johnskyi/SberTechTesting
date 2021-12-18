@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlType;
 
 @Data
 @XmlRootElement(name = "customer")
-@XmlType(propOrder = { "uid","name", "lastname", "patronymic", "company","email","phone" })
+@XmlType(propOrder = { "uid","name", "lastname", "company","email","phone" })
 public class Customer {
 
     String uid;

@@ -5,12 +5,12 @@ import lombok.extern.slf4j.Slf4j;
 import model.Customer;
 import model.CustomerStorage;
 import model.Request;
-import service.ActionService;
+import service.IActionService;
 
 import javax.xml.bind.JAXBException;
 
 @Slf4j
-public class ActionServiceImpl implements ActionService {
+public class ActionService implements IActionService {
 
     @Override
     public int saveCustomer(Customer customer) throws JAXBException {

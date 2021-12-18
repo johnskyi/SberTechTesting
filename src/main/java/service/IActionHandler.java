@@ -9,10 +9,10 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.util.List;
 
-public interface ActionHandler {
-    void save() throws JAXBException;
-    void delete() throws JAXBException, CustomerNotFoundException;
-    void update() throws JAXBException, CustomerNotFoundException;
-    void findByPhone() throws JAXBException, CustomerNotFoundException;
+public interface IActionHandler {
+    int save() throws JAXBException;
+    int delete() throws JAXBException, CustomerNotFoundException;
+    int update() throws JAXBException, CustomerNotFoundException;
+    Customer findByPhone() throws JAXBException, CustomerNotFoundException;
     List<Customer> getCustomers() throws ParserConfigurationException, IOException, SAXException, JAXBException;
 }

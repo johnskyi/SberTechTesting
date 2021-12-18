@@ -1,7 +1,7 @@
 import exception.CustomerNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import model.Commands;
-import service.impl.ActionHandlerImpl;
+import service.impl.ActionHandler;
 
 import javax.xml.bind.JAXBException;
 import java.util.Scanner;
@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        ActionHandlerImpl actionHandler = new ActionHandlerImpl();
+        ActionHandler actionHandler = new ActionHandler();
         for(;;) {
             System.out.println("Please enter command or enter HELP");
             Scanner scannerKey = new Scanner(System.in);
