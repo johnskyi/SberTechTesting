@@ -36,6 +36,8 @@ class ActionServiceImplTest {
     @DisplayName("Save customer, return uid")
     void saveCustomer() throws JAXBException {
         Mockito.when(actionServiceMock.saveCustomer(testCustomerOne)).thenReturn(Integer.parseInt(testCustomerOne.getUid()));
+        actionServiceMock.saveCustomer(testCustomerOne);
+        Mockito.verify(actionServiceMock,Mockito.times(1)).saveCustomer(testCustomerOne);
         assertEquals(123,actionServiceMock.saveCustomer(testCustomerOne));
     }
 
@@ -44,6 +46,8 @@ class ActionServiceImplTest {
     void deleteCustomer() throws JAXBException, CustomerNotFoundException {
         Request request = Request.builder().lastname("Ivanov").build();
         Mockito.when(actionServiceMock.deleteCustomer(request)).thenReturn(Integer.parseInt(testCustomerOne.getUid()));
+        actionServiceMock.deleteCustomer(request);
+        Mockito.verify(actionServiceMock,Mockito.times(1)).deleteCustomer(request);
         assertEquals(123,actionServiceMock.deleteCustomer(request));
     }
 
@@ -52,6 +56,8 @@ class ActionServiceImplTest {
     void updateCustomer() throws JAXBException, CustomerNotFoundException {
         Request request = Request.builder().lastname("Ivanov").company("Magnet").build();
         Mockito.when(actionServiceMock.updateCustomer(request)).thenReturn(Integer.parseInt(testCustomerOne.getUid()));
+        actionServiceMock.updateCustomer(request);
+        Mockito.verify(actionServiceMock,Mockito.times(1)).updateCustomer(request);
         assertEquals(123,actionServiceMock.updateCustomer(request));
     }
 
@@ -60,6 +66,8 @@ class ActionServiceImplTest {
     void findCustomerByPhone() throws JAXBException, CustomerNotFoundException {
         Request request = Request.builder().phone("12345").build();
         Mockito.when(actionServiceMock.findCustomerByPhone(request)).thenReturn(testCustomerOne);
+        actionServiceMock.findCustomerByPhone(request);
+        Mockito.verify(actionServiceMock,Mockito.times(1)).findCustomerByPhone(request);
         assertEquals(testCustomerOne,actionServiceMock.findCustomerByPhone(request));
     }
     @Test

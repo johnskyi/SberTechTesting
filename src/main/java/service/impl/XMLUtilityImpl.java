@@ -10,7 +10,7 @@ import javax.xml.bind.Unmarshaller;
 import java.io.File;
 
 @UtilityClass
-public class XMLUtilityImpl {
+final class XMLUtilityImpl {
     private static final String CUSTOMER_STORAGE = "src/main/java/data/customers.xml";
     private static final File FILE_STORAGE = new File(CUSTOMER_STORAGE);
 

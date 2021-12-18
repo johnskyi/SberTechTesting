@@ -35,6 +35,8 @@ class ActionHandlerImplTest {
     @DisplayName("Save customer, return uid")
     void save() throws JAXBException {
         Mockito.when(actionHandlerMock.save()).thenReturn(Integer.parseInt(testCustomerOne.getUid()));
+        actionHandlerMock.save();
+        Mockito.verify(actionHandlerMock,Mockito.times(1)).save();
         assertEquals(123,actionHandlerMock.save());
     }
 
@@ -42,6 +44,8 @@ class ActionHandlerImplTest {
     @DisplayName("Delete customer, return uid")
     void delete() throws JAXBException, CustomerNotFoundException {
         Mockito.when(actionHandlerMock.delete()).thenReturn(Integer.parseInt(testCustomerOne.getUid()));
+        actionHandlerMock.delete();
+        Mockito.verify(actionHandlerMock,Mockito.times(1)).delete();
         assertEquals(123,actionHandlerMock.delete());
     }
 
@@ -49,6 +53,8 @@ class ActionHandlerImplTest {
     @DisplayName("Update customer, return uid")
     void update() throws JAXBException, CustomerNotFoundException {
         Mockito.when(actionHandlerMock.update()).thenReturn(Integer.parseInt(testCustomerOne.getUid()));
+        actionHandlerMock.update();
+        Mockito.verify(actionHandlerMock,Mockito.times(1)).update();
         assertEquals(123,actionHandlerMock.update());
     }
 
@@ -56,6 +62,8 @@ class ActionHandlerImplTest {
     @DisplayName("Find customer, return customer")
     void findByPhone() throws JAXBException, CustomerNotFoundException {
         Mockito.when(actionHandlerMock.findByPhone()).thenReturn(testCustomerOne);
+        actionHandlerMock.findByPhone();
+        Mockito.verify(actionHandlerMock,Mockito.times(1)).findByPhone();
         assertEquals(testCustomerOne,actionHandlerMock.findByPhone());
     }
 }
