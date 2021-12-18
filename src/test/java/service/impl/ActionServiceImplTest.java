@@ -77,14 +77,15 @@ class ActionServiceImplTest {
         Mockito.when(actionServiceMock.findCustomerByPhone(Mockito.any())).thenThrow(CustomerNotFoundException.class);
         Mockito.verifyNoMoreInteractions(actionServiceMock);
         assertThrows(CustomerNotFoundException.class, () ->actionServiceMock.findCustomerByPhone(request));
+        Mockito.verify(actionServiceMock).findCustomerByPhone(Mockito.any());
     }
     @Test
     @DisplayName("Find unknown customer throws customerNotFound")
     void updateCustomer_throwsCustomerNotFound() throws JAXBException, CustomerNotFoundException {
         Request request = Request.builder().lastname("Petrov").build();
         Mockito.when(actionServiceMock.updateCustomer(Mockito.any())).thenThrow(CustomerNotFoundException.class);
-        Mockito.verifyNoMoreInteractions(actionServiceMock);
         assertThrows(CustomerNotFoundException.class, () ->actionServiceMock.updateCustomer(request));
+        Mockito.verify(actionServiceMock).updateCustomer(Mockito.any());
     }
 
 }
