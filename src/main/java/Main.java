@@ -1,9 +1,11 @@
 import exception.CustomerNotFoundException;
+import exception.InvalidCommandException;
 import lombok.extern.slf4j.Slf4j;
 import model.Commands;
 import service.impl.ActionHandler;
 
 import javax.xml.bind.JAXBException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 @Slf4j
@@ -22,8 +24,8 @@ public class Main {
             }
             try{
                 actionHandler.readActionKey(actionKey);}
-            catch (JAXBException | CustomerNotFoundException e) {
-                e.printStackTrace();
+            catch (JAXBException | CustomerNotFoundException | InvalidCommandException e) {
+                log.error(Arrays.toString(e.getStackTrace()));
             }
 
         }

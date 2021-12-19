@@ -1,6 +1,7 @@
 package service.impl;
 
 import exception.CustomerNotFoundException;
+import exception.InvalidCommandException;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import model.Commands;
@@ -22,12 +23,13 @@ public class ActionHandler implements IActionHandler {
 
 
 
-    public void readActionKey(String actionKey) throws JAXBException, CustomerNotFoundException {
+    public void readActionKey(String actionKey) throws JAXBException, CustomerNotFoundException, InvalidCommandException {
         if(validateInputAction(actionKey)) {
             switchNextMethod(actionKey);
         } else {
             System.out.println("Invalid command");
-            log.error("Invalid command " + actionKey);
+            throw new InvalidCommandException(actionKey);
+
         }
     }
     void switchNextMethod(String action) throws JAXBException, CustomerNotFoundException {
