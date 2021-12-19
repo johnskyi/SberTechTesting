@@ -146,6 +146,6 @@ public class ActionHandler implements IActionHandler {
 
     @Override
     public List<Customer> getCustomers() throws JAXBException {
-        return XMLUtilityImpl.readXml().getCustomers();
+        return XMLUtility.readXml().getCustomers();
     }
 }
